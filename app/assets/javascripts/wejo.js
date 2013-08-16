@@ -3,11 +3,30 @@ Wejo = {
 		console.log("BLAH");
 	},
 
-	to1slide: function() {
-		$('.slide2').animate({'left': '0px'});
+	animateSlides: function(slidePositions) {
+		for (var sP in slidePositions) {
+			$('.slide' + sP).animate({left: (slidePositions[sP] + 'px')});
+		};
 	},
 
-	to2slides: function() {
-		$('.slide2').animate({'left': '207px'});
+	to1slide: function() {
+		this.animateSlides({1:"0",
+												2:"0",
+												3:"0",
+												4:"0"});
+	},
+
+	to3slides: function() {
+		this.animateSlides({1:"0",
+												2:"200",
+												3:"400",
+												4:"0"});
+	},
+
+	to4slides: function() {
+		this.animateSlides({1:"200",
+												2:"400",
+												3:"600",
+												4:"0"});
 	}
 };
