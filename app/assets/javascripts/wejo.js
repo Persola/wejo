@@ -2,26 +2,34 @@ var Wejo = {
 	init: function() {
 		self = this;
 
-		$(function() {
-			console.log("INITIALIZATION INITIALIZED!");
+		console.log("INITIALIZATION INITIALIZED!");
 
-			self.$slide1 = $('.slide1');
-			self.$slide2 = $('.slide2');
-			self.$slide3 = $('.slide3');
-			self.$slide4 = $('.slide4');
+		self.$slide1 = $('.slide1');
+		self.$slide2 = $('.slide2');
+		self.$slide3 = $('.slide3');
+		self.$slide4 = $('.slide4');
 
-			self.slides = {
-				1: new Slide1(),
-				2: new Slide2(),
-				3: new Slide3(),
-				4: new Slide4()
-			};
+		self.slides = {
+			1: new Slide1(),
+			2: new Slide2(),
+			3: new Slide3(),
+			4: new Slide4()
+		};
 
-			self.$slide1.html(self.slides[1].renderWordsAndPictures().$el);
-			self.$slide2.html(self.slides[2].render().$el);
-			self.$slide3.html(self.slides[3].render().$el);
-			self.$slide4.html(self.slides[4].render().$el);
-		})
+		self.$slide1.html(self.slides[1].renderWordsAndPictures().$el);
+		self.$slide2.html(self.slides[2].render().$el);
+		self.$slide3.html(self.slides[3].render().$el);
+		self.$slide4.html(self.slides[4].render().$el);
+
+		this.mapOptions = {
+	    zoom: 2,
+	    center: new google.maps.LatLng(0, 0),
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+
+		this.map = new google.maps.Map(document.getElementById('map-canvas'), self.mapOptions);
+
+		self.setZoomListener();
 	},
 
 	animateSlides: function(slidePositions) {
@@ -52,5 +60,17 @@ var Wejo = {
 												3:"600",
 												4:"0"});
 		this.slides[1].renderWords();
+	},
+
+	setZoomListener: function() {
+		self = this;
+
+		google.maps.event.addListener(self.map, "zoom_changed", function(oldZoom, newZoom) {
+  		if(oldZoom < 4 && newZoom > 4) {
+  			self.getWide();
+  		} else if(oldZoom > 4 && newZoom < 4) {
+  			self.getSlim();
+  		}
+		})
 	}
 };

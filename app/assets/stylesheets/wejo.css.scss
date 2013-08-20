@@ -1,33 +1,7 @@
-@mixin slide {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 200px;
-	height: 100%;
-	background-color: #e81;
-}
-
-.slide1 {
-	z-index: 3;
-	@include slide;
-	background-color: #1e8;
-}
-
-.slide2 {
-	z-index: 2;
-	@include slide;
-	background-color: #81e;
-}
-
-.slide3 {
-	z-index: 1;
-	@include slide;
-}
-
-.slide4 {
-	z-index: 2;
-	@include slide;
-	background-color: #888;
+body {
+	height: 550px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+	font-size: 24px;;
 }
 
 .overlay {
@@ -35,16 +9,50 @@
 	position: relative;
 	top: 0px;
 	left: 0px;
-	width: 800px;
-	height: 400px;
-	opacity: 0.9;
+	height: 100%;
+	width: 200px;
+	opacity: 0.85;
+}
+
+@mixin slide {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 200px;
+	height: 100%;
+	background-color: #e81;
+	color: #fff;
+	text-align: center;
+}
+
+.slide1 {
+	z-index: 5;
+	@include slide;
+	background-color: #1e8;
+}
+
+.slide2 {
+	z-index: 4;
+	@include slide;
+	background-color: #81e;
+}
+
+.slide3 {
+	z-index: 3;
+	@include slide;
+}
+
+.slide4 {
+	z-index: 4;
+	@include slide;
+	background-color: #888;
 }
 
 #map-canvas {
-	z-index: 0;
-	position: fixed !important;
+	z-index: 2;
+	position: static !important;
 	height: 100%;
+	width: 100%;
 	left: 0px;
 	top: 0px;
-	width: 100%;
 }

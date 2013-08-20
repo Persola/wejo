@@ -1,6 +1,6 @@
 Slide3 = Backbone.View.extend({
 	render: function() {
-		this.$el.html("slide3");
+		this.$el.html("Analytics");
 		return this;
 	}
 });
