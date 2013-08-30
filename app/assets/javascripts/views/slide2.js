@@ -1,6 +1,16 @@
 Slide2 = Backbone.View.extend({
 	render: function() {
-		this.$el.html("Pictures");
+		var self = this;
+
+		self.$el.append("Pictures");
+		_(Wejo.store.pictures).each(function(picture) {
+			self.$el.append(self.listifyPicture(picture));
+		});
+
 		return this;
+	},
+
+	listifyPicture: function(picture) {
+		return '<div class="listItem">' + picture.caption + '</div>'
 	}
 });

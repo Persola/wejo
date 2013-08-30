@@ -1,6 +1,8 @@
 Slide4 = Backbone.View.extend({
 	render: function() {
-		this.$el.html("Profile");
-		return this;
+		var self = this;
+
+		self.$el.html(Wejo.store.users[0].name);
+		return self;
 	}
 });

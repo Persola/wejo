@@ -1,12 +1,23 @@
+html {
+	height: 100%;
+	width: 100%;
+}
+
 body {
-	height: 550px;
+	height: 100%;
+	width: 100%;
 	font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-	font-size: 24px;;
+	font-size: 24px;
+}
+
+.wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
 }
 
 .overlay {
-	overflow: visible !important;
-	position: relative;
+	position: absolute;
 	top: 0px;
 	left: 0px;
 	height: 100%;
@@ -49,10 +60,19 @@ body {
 }
 
 #map-canvas {
-	z-index: 2;
-	position: static !important;
+	z-index: 1;
+	position: absolute;
 	height: 100%;
 	width: 100%;
 	left: 0px;
 	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: #f04;
+}
+
+.listItem {
+	background-color: #333;
+	opacity: 0.5;
+	margin: 4px;
 }
