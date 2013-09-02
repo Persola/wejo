@@ -23,13 +23,13 @@ var Wejo = {
 		self.$slide3.html(self.slides[3].render().$el);
 		self.$slide4.html(self.slides[4].render().$el);
 
-		// this.mapOptions = {
-	 //    zoom: 2,
-	 //    center: new google.maps.LatLng(0, 0),
-	 //    mapTypeId: google.maps.MapTypeId.ROADMAP
-		// };
+		this.mapOptions = {
+	    zoom: 2,
+	    center: new google.maps.LatLng(0, 0),
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
 
-		// this.map = new google.maps.Map(document.getElementById('map-canvas'), self.mapOptions);
+		this.map = new google.maps.Map(document.getElementById('map-canvas'), self.mapOptions);
 
 		self.setZoomListener();
 	},
@@ -77,12 +77,12 @@ var Wejo = {
 	setZoomListener: function() {
 		self = this;
 
-		// google.maps.event.addListener(self.map, "zoom_changed", function(oldZoom, newZoom) {
-	 //  		if(oldZoom < 4 && newZoom > 4) {
-	 //  			self.getWide();
-	 //  		} else if(oldZoom > 4 && newZoom < 4) {
-	 //  			self.getSlim();
-	 //  		}
-		// });
+		google.maps.event.addListener(self.map, "zoom_changed", function(oldZoom, newZoom) {
+	  		if(oldZoom < 4 && newZoom > 4) {
+	  			self.getWide();
+	  		} else if(oldZoom > 4 && newZoom < 4) {
+	  			self.getSlim();
+	  		}
+		});
 	}
 };
