@@ -1,8 +1,9 @@
-User.destroy_all!
-Post.destroy_all!
-Word.destroy_all!
-Picture.destroy_all!
-
+if ENV['RAILS_ENV'].to_s == 'development'
+	User.destroy_all!
+	Post.destroy_all!
+	Word.destroy_all!
+	Picture.destroy_all!
+end
 
 mo = User.create!(name: "Mohamed")
 
