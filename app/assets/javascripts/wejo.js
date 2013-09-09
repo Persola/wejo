@@ -6,6 +6,10 @@ var Wejo = {
 
 		self.initDataStorage(bootstrapData);
 
+		self.initMap();
+
+		self.setZoomListener();
+
 		self.$slide1 = $('.slide1');
 		self.$slide2 = $('.slide2');
 		self.$slide3 = $('.slide3');
@@ -22,16 +26,6 @@ var Wejo = {
 		self.$slide2.html(self.slides[2].render().$el);
 		self.$slide3.html(self.slides[3].render().$el);
 		self.$slide4.html(self.slides[4].render().$el);
-
-		this.mapOptions = {
-	    zoom: 2,
-	    center: new google.maps.LatLng(0, 0),
-	    mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-
-		this.map = new google.maps.Map(document.getElementById('map-canvas'), self.mapOptions);
-
-		self.setZoomListener();
 	},
 
 	initDataStorage: function(bootstrapData) {
@@ -42,6 +36,16 @@ var Wejo = {
 		for (var bootstrapAttr in bootstrapData) {
 			self.store[bootstrapAttr] = bootstrapData[bootstrapAttr];
 		};
+	},
+
+	initMap: function() {
+		self.mapOptions = {
+	    zoom: 2,
+	    center: new google.maps.LatLng(0, 0),
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+
+		this.map = new google.maps.Map(document.getElementById('map-canvas'), self.mapOptions);
 	},
 
 	animateSlides: function(slidePositions) {
@@ -77,12 +81,17 @@ var Wejo = {
 	setZoomListener: function() {
 		self = this;
 
-		google.maps.event.addListener(self.map, "zoom_changed", function(oldZoom, newZoom) {
-	  		if(oldZoom < 4 && newZoom > 4) {
-	  			self.getWide();
-	  		} else if(oldZoom > 4 && newZoom < 4) {
-	  			self.getSlim();
-	  		}
+		self.oldZoom = self.mapOptions.zoom;
+
+		google.maps.event.addListener(self.map, "zoom_changed", function() {
+			console.log("old zoom: " + self.oldZoom);
+			console.log("new zoom: " + self.map.getZoom());
+		 		if(self.oldZoom < 4 && self.map.getZoom() >= 4) {
+		 			self.getWide();
+		 		} else if(self.oldZoom >= 4 && self.map.getZoom() < 4) {
+		 			self.getSlim();
+		 		}
+		 	self.oldZoom = self.map.getZoom();
 		});
 	}
 };
