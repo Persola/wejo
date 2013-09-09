@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Wejo</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>Wejo</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 
-<!--   Google Maps embed code
- -->    <title>Wejo</title>
+    <!-- Google Maps embed code -->    
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -15,31 +14,13 @@
         margin: 0;
         padding: 0;
         height: 100%;
-/*        z-index: -4;
-*/      }
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script>
-		var map;
-		function initialize() {
-  		var mapOptions = {
-    		zoom: 2,
-    		center: new google.maps.LatLng(0, 0),
-    		mapTypeId: google.maps.MapTypeId.ROADMAP
-  		};
-  		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-		}
+  <!-- end Google Maps code -->
 
-		google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
-<!--   end Google Maps code
- -->
-</head>
-
-<body>
-
-<%= yield %>
-
-</body>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
 </html>

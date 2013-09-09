@@ -9,7 +9,10 @@
 </div>
 
 <script type="text/javascript">
-	var bootstrapData = <%= {"words" => Word.all, "users" => User.all, "pictures" => Picture.all}.to_json.html_safe %>;
+	var bootstrapData = <%= {"words" => Word.all,
+							 "users" => User.all,
+							 "pictures" => Picture.all
+							}.to_json.html_safe %>;
 
 	$(Wejo.init(bootstrapData));
 </script>
