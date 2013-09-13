@@ -2,6 +2,8 @@ var Wejo = {
 	init: function(bootstrapData) {
 		self = this;
 
+		self.slideWidth = 200;
+
 		console.log("INITIALIZATION INITIALIZED!");
 
 		self.initDataStorage(bootstrapData);
@@ -54,42 +56,91 @@ var Wejo = {
 		};
 	},
 
-	getSlim: function() {
-		this.animateSlides({1:"0",
-												2:"0",
-												3:"0",
-												4:"0"});
-		this.slides[1].renderWordsAndPictures();
+	slidePosition: function(multiplier) {
+		return (self.slideWidth * multiplier).toString();
 	},
 
-	getWide: function() {
-		this.animateSlides({1:"0",
-												2:"200",
-												3:"400",
-												4:"0"});
-		this.slides[1].renderWords();
+	toWorldLayout: function(user) {
+		var self = this;
+
+		if(user) {
+			this.animateSlides({1: self.slidePosition(1),
+													2: self.slidePosition(1),
+													3: self.slidePosition(1),
+													4: self.slidePosition(0)
+			});
+
+			this.slides[1].renderWordsAndPictures();
+		} else {
+			this.animateSlides({1: self.slidePosition(0),
+													2: self.slidePosition(0),
+													3: self.slidePosition(0),
+													4: self.slidePosition(0)
+			});
+
+			this.slides[1].renderWordsAndPictures();
+		}
 	},
 
-	showProfile: function() {
-		this.animateSlides({1:"200",
-												2:"400",
-												3:"600",
-												4:"0"});
-		this.slides[1].renderWords();
+	toCountryLayout: function(user) {		
+		var self = this;
+
+		if(user) {
+			this.animateSlides({1: self.slidePosition(1),
+													2: self.slidePosition(2),
+													3: self.slidePosition(2),
+													4: self.slidePosition(0)
+			});
+
+			this.slides[1].renderWords();
+		} else {
+			this.animateSlides({1: self.slidePosition(0),
+													2: self.slidePosition(1),
+													3: self.slidePosition(1),
+													4: self.slidePosition(0)
+			});
+
+			this.slides[1].renderWords();
+		}
+	},
+
+	toStreetLayout: function(user) {
+		var self = this;
+		
+		if(user) {
+			this.animateSlides({1: self.slidePosition(1),
+													2: self.slidePosition(2),
+													3: self.slidePosition(3),
+													4: self.slidePosition(0)
+			});
+
+			this.slides[1].renderWords();
+		} else {
+			this.animateSlides({1: self.slidePosition(0),
+													2: self.slidePosition(1),
+													3: self.slidePosition(2),
+													4: self.slidePosition(0)
+			});
+
+			this.slides[1].renderWords();
+		}
 	},
 
 	setZoomListener: function() {
-		self = this;
+		var self = this;
 
 		self.oldZoom = self.mapOptions.zoom;
 
 		google.maps.event.addListener(self.map, "zoom_changed", function() {
 			console.log("old zoom: " + self.oldZoom);
 			console.log("new zoom: " + self.map.getZoom());
-		 		if(self.oldZoom < 4 && self.map.getZoom() >= 4) {
-		 			self.getWide();
-		 		} else if(self.oldZoom >= 4 && self.map.getZoom() < 4) {
-		 			self.getSlim();
+		 		if(self.map.getZoom() < 7 && self.oldZoom >= 7) {
+		 			self.toWorldLayout();
+		 		} else if(_([7, 8, 9, 10, 11, 12, 13]).contains(self.map.getZoom()) &&
+		 							! _([7, 8, 9, 10, 11, 12, 13]).contains(self.oldZoom)) {
+		 			self.toCountryLayout();
+		 		} else if(self.map.getZoom() >= 14 && self.oldZoom < 14) {
+		 			self.toStreetLayout();
 		 		}
 		 	self.oldZoom = self.map.getZoom();
 		});
