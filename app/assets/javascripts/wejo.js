@@ -44,7 +44,13 @@ var Wejo = {
 		self.mapOptions = {
 	    zoom: 2,
 	    center: new google.maps.LatLng(0, 0),
-	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	    mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    styles: [
+  			{
+    			featureType: "all",
+    			stylers: [{ saturation: -80 }]
+    		}
+ 			]
 		};
 
 		this.map = new google.maps.Map(document.getElementById('map-canvas'), self.mapOptions);
