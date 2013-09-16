@@ -37,22 +37,22 @@ body {
 	text-align: center;
 }
 
-.slide1 {
+.mainSlide {
 	z-index: 6;
 	@include slide;
 }
 
-.slide2 {
+.picturesSlide {
 	z-index: 5;
 	@include slide;
 }
 
-.slide3 {
+.analyticsSlide {
 	z-index: 4;
 	@include slide;
 }
 
-.slide4 {
+.profileSlide {
 	z-index: 5;
 	@include slide;
 }
